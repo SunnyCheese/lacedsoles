@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LacedSoles — Donate</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1D9E75; --green-dark: #0F6E56; --green-light: #E1F5EE;
+    --text: #1a1a1a; --text-muted: #6b6b6b; --text-faint: #9a9a9a;
+    --border: rgba(0,0,0,0.1); --bg: #fafaf8; --bg-card: #ffffff;
+    --radius: 10px; --radius-lg: 14px;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2rem; border-bottom: 1px solid var(--border); background: var(--bg-card); position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
+  .logo span { color: var(--green); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); font-weight: 500; }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-light);
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+
+  .page h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .page h1 em { font-style: italic; color: var(--green); }
+
+  .page-sub {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 460px;
+    margin: 0 auto 4rem;
+    line-height: 1.7;
+  }
+
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .choice {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    background: var(--bg-card);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .choice:hover {
+    border-color: var(--green);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(29,158,117,0.12);
+  }
+
+  .choice-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .choice-icon svg { width: 28px; height: 28px; stroke: var(--green); }
+
+  .choice h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .choice p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .choice-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--green-light);
+    color: var(--green);
+    padding: 4px 10px;
+    border-radius: 99px;
+    margin-top: 0.5rem;
+  }
+
+  .back-link {
+    font-size: 13px;
+    color: var(--text-faint);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover { color: var(--green); }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 13px; color: var(--text-faint); }
+  footer a { color: var(--green); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .choices { grid-template-columns: 1fr; }
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Laced<span>Soles</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="needs.html">Needs board</a></li>
+    <li><a href="donate.html" class="active">Donate</a></li>
+      <li><a href="partners.html">Partners</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="eyebrow">Make an impact</div>
+  <h1>How would you like<br>to <em>help?</em></h1>
+  <p class="page-sub">Every pair makes a difference. Choose how you'd like to contribute and we'll take care of the rest.</p>
+
+  <div class="choices">
+
+    <a href="#" class="choice" onclick="showComingSoon(event)">
+      <div class="choice-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="20" height="13" rx="2"/>
+          <path d="M2 10h20"/>
+          <path d="M6 14h4"/>
+        </svg>
+      </div>
+      <h2>Donate Cash</h2>
+      <p>We'll purchase and ship the right shoes on your behalf. Pick a size from our needs board and contribute any amount.</p>
+      <span class="choice-tag">Browse needs board →</span>
+    </a>
+
+    <a href="needs.html" class="choice">
+      <div class="choice-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9h13l4 4v4H3V9z"/>
+          <circle cx="7.5" cy="17.5" r="1.5"/>
+          <circle cx="16.5" cy="17.5" r="1.5"/>
+          <path d="M3 9V6a1 1 0 0 1 1-1h9"/>
+        </svg>
+      </div>
+      <h2>Ship Shoes</h2>
+      <p>Have lightly used shoes sitting around? Mail them directly to us and we'll get them to someone who needs them.</p>
+      <span class="choice-tag">See shipping instructions →</span>
+    </a>
+
+  </div>
+
+  <!-- SHIP INSTRUCTIONS (hidden until clicked) -->
+  <div id="ship-instructions" style="display:none; text-align:left; border:1.5px solid var(--green); border-radius:var(--radius-lg); padding:2rem; background:var(--bg-card); margin-bottom:2rem;">
+    <div style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:1.25rem;">Shipping instructions</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem;">
+      <div style="display:flex;gap:10px;font-size:14px;color:var(--text-muted);align-items:flex-start;">
+        <span style="color:var(--green);font-weight:500;flex-shrink:0;">✓</span>
+        Shoes must be lightly used — no major tears, separated soles, or strong odors
+      </div>
+      <div style="display:flex;gap:10px;font-size:14px;color:var(--text-muted);align-items:flex-start;">
+        <span style="color:var(--green);font-weight:500;flex-shrink:0;">✓</span>
+        Give them a quick clean before packing
+      </div>
+      <div style="display:flex;gap:10px;font-size:14px;color:var(--text-muted);align-items:flex-start;">
+        <span style="color:var(--green);font-weight:500;flex-shrink:0;">✓</span>
+        Check the needs board first — we prioritize specific sizes
+      </div>
+      <div style="display:flex;gap:10px;font-size:14px;color:var(--text-muted);align-items:flex-start;">
+        <span style="color:var(--green);font-weight:500;flex-shrink:0;">✓</span>
+        Include a slip of paper with your name and email so we can send a confirmation
+      </div>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:14px;color:var(--text-muted);">
+      <div style="font-weight:500;color:var(--text);margin-bottom:4px;">Ship to</div>
+      LacedSoles · PO Box 0000 · Your City, ST 00000
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to home</a>
+</div>
+
+<footer>
+  <p>LacedSoles · <a href='mailto:lacedsoles0@gmail.com'>lacedsoles0@gmail.com</a> · <a href='tel:3366099326'>336-609-9326</a></p>
+  <p style='margin-top:0.5rem;'>
+    <a href='https://instagram.com/lacedsoles.501c3' target='_blank'>@lacedsoles.501c3</a> &nbsp;·&nbsp;
+    <a href='#'>Privacy Policy</a> &nbsp;·&nbsp;
+    <a href='#'>Terms</a>
+  </p>
+</footer>
+
+<script>
+  function showShip(e) {
+    e.preventDefault();
+    const el = document.getElementById('ship-instructions');
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    if (el.style.display === 'block') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+</script>
+
+
+  <div id="coming-soon-box" style="display:none;max-width:780px;margin:0 auto 2rem;text-align:left;border:1.5px solid #1D9E75;border-radius:14px;padding:2rem;background:#fff;">
+    <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:0.75rem;">Online payments coming soon</div>
+    <p style="font-size:14px;color:#6b6b6b;line-height:1.6;margin-bottom:1rem;">We are setting up our payment system. In the meantime reach out to us directly and we will make it work.</p>
+    <a href="mailto:lacedsoles0@gmail.com" style="display:inline-block;background:#1D9E75;color:white;text-decoration:none;font-size:14px;font-weight:500;padding:10px 20px;border-radius:10px;">Email us to donate — lacedsoles0@gmail.com</a>
+  </div>
+  <script>
+  function showComingSoon(e) {
+    e.preventDefault();
+    var el = document.getElementById('coming-soon-box');
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    if (el.style.display === 'block') el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  </script>
+</body>
+</html>
