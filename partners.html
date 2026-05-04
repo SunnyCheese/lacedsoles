@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LacedSoles — Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1D9E75; --green-dark: #0F6E56; --green-light: #E1F5EE; --green-text: #085041;
+    --text: #1a1a1a; --text-muted: #6b6b6b; --text-faint: #9a9a9a;
+    --border: rgba(0,0,0,0.1); --bg: #fafaf8; --bg-card: #ffffff; --bg-surface: #f4f3ef;
+    --radius: 10px; --radius-lg: 14px;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2rem; border-bottom: 1px solid var(--border); background: var(--bg-card); position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
+  .logo span { color: var(--green); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); font-weight: 500; }
+
+  .page { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+
+  .eyebrow { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); background: var(--green-light); padding: 4px 12px; border-radius: 99px; margin-bottom: 1.5rem; }
+
+  .page-header { margin-bottom: 4rem; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 5vw, 52px); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
+  .page-header h1 em { font-style: italic; color: var(--green); }
+  .page-header p { font-size: 17px; color: var(--text-muted); max-width: 520px; line-height: 1.7; }
+
+  /* PARTNER GRID — ready for logos when you have them */
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 5rem;
+  }
+
+  .partner-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 140px;
+    gap: 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .partner-card.placeholder {
+    border-style: dashed;
+    background: var(--bg-surface);
+  }
+
+  .partner-card.placeholder .partner-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-card.placeholder span {
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  /* BECOME A PARTNER */
+  .become {
+    background: var(--text);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .become h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .become h2 em { font-style: italic; color: #5DE8B3; }
+
+  .become p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 420px; }
+
+  .btn-become {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+
+  .btn-become:hover { background: #5DE8B3; color: var(--text); }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 13px; color: var(--text-faint); }
+  footer a { color: var(--green); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .partners-grid { grid-template-columns: 1fr 1fr; }
+    .become { grid-template-columns: 1fr; text-align: center; }
+    .become p { margin: 0 auto; }
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Laced<span>Soles</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="donate.html">Donate</a></li>
+    <li><a href="needs.html">Needs board</a></li>
+    <li><a href="partners.html" class="active">Partners</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="eyebrow">Our partners</div>
+    <h1>Together we go<br><em>further.</em></h1>
+    <p>We work with shoe retailers, community organizations, and individuals who share our mission. Interested in partnering with us? We'd love to hear from you.</p>
+  </div>
+
+  <!-- Partner slots — replace placeholder cards with real logos as you get partners -->
+  <div class="partners-grid">
+    <div class="partner-card placeholder">
+      <div class="partner-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+      </div>
+      <span>Partner coming soon</span>
+    </div>
+    <div class="partner-card placeholder">
+      <div class="partner-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+      </div>
+      <span>Partner coming soon</span>
+    </div>
+    <div class="partner-card placeholder">
+      <div class="partner-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+      </div>
+      <span>Partner coming soon</span>
+    </div>
+  </div>
+
+  <!-- BECOME A PARTNER CTA -->
+  <div class="become">
+    <div>
+      <h2>Want to <em>partner</em><br>with us?</h2>
+      <p>Whether you're a shoe retailer, a community org, or just someone who wants to help — we want to work with you.</p>
+    </div>
+    <a href="mailto:lacedsoles0@gmail.com" class="btn-become">Get in touch →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>LacedSoles · <a href="mailto:lacedsoles0@gmail.com">lacedsoles0@gmail.com</a> · <a href="tel:3366099326">336-609-9326</a></p>
+  <p style="margin-top:0.5rem;"><a href="https://instagram.com/lacedsoles.501c3" target="_blank">@lacedsoles.501c3</a> &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms</a></p>
+</footer>
+
+</body>
+</html>
