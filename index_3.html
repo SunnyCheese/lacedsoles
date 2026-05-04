@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LacedSoles — Every pair counts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1D9E75; --green-dark: #0F6E56; --green-light: #E1F5EE; --green-text: #085041;
+    --red: #E24B4A; --red-light: #FCEBEB; --red-text: #A32D2D;
+    --amber: #EF9F27; --amber-light: #FAEEDA; --amber-text: #854F0B;
+    --text: #1a1a1a; --text-muted: #6b6b6b; --text-faint: #9a9a9a;
+    --border: rgba(0,0,0,0.1); --bg: #fafaf8; --bg-card: #ffffff; --bg-surface: #f4f3ef;
+    --radius: 10px; --radius-lg: 14px;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2rem; border-bottom: 1px solid var(--border); background: var(--bg-card); position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
+  .logo span { color: var(--green); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .btn-primary { background: var(--green); color: white; border: none; border-radius: var(--radius); padding: 8px 18px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block; transition: background 0.15s; }
+  .btn-primary:hover { background: var(--green-dark); }
+  .hero { padding: 5rem 2rem 4rem; text-align: center; max-width: 680px; margin: 0 auto; }
+  .hero-eyebrow { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 1.25rem; background: var(--green-light); padding: 4px 12px; border-radius: 99px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.25rem; }
+  .hero h1 em { font-style: italic; color: var(--green); }
+  .hero p { font-size: 17px; color: var(--text-muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .counters { display: flex; justify-content: center; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; max-width: 500px; margin: 0 auto 5rem; background: var(--bg-card); }
+  .counter { flex: 1; padding: 1.5rem 1rem; text-align: center; border-right: 1px solid var(--border); }
+  .counter:last-child { border-right: none; }
+  .counter-num { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--green); letter-spacing: -0.02em; line-height: 1; margin-bottom: 5px; }
+  .counter-label { font-size: 12px; color: var(--text-faint); font-weight: 400; }
+  .needs-section { max-width: 820px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.01em; }
+  .section-hint { font-size: 13px; color: var(--text-faint); }
+  .category-section { margin-bottom: 2.5rem; }
+  .category-header { display: flex; align-items: baseline; justify-content: space-between; font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: -0.01em; color: var(--text); padding-bottom: 0.75rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .category-note { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; color: var(--text-faint); letter-spacing: 0; }
+  .table-head { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr 1fr; gap: 12px; padding: 0 16px 8px; }
+  .th { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); text-align: center; }
+  .th:first-child { text-align: left; }
+  .need-row { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr 1fr; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 8px; background: var(--bg-card); cursor: pointer; transition: border-color 0.15s, transform 0.1s; text-decoration: none; color: inherit; }
+  .need-row:hover { border-color: var(--green); transform: translateY(-1px); }
+  .need-row.fulfilled { opacity: 0.6; cursor: default; }
+  .need-row.fulfilled:hover { border-color: var(--border); transform: none; }
+  .size-label { font-size: 14px; font-weight: 500; color: var(--text); }
+  .num-cell { font-size: 14px; color: var(--text-muted); text-align: center; }
+  .bar-wrap { background: var(--bg-surface); border-radius: 99px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 6px; border-radius: 99px; transition: width 0.6s ease; }
+  .bar-pct { font-size: 11px; color: var(--text-faint); margin-top: 4px; text-align: right; }
+  .badge { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 99px; text-align: center; white-space: nowrap; }
+  .badge-urgent { background: var(--red-light); color: var(--red-text); }
+  .badge-progress { background: var(--amber-light); color: var(--amber-text); }
+  .badge-done { background: var(--green-light); color: var(--green-text); }
+  .feed-section { max-width: 820px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .feed-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .feed-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
+  .feed-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .feed-name { color: var(--text); font-weight: 500; }
+  .state-msg { text-align: center; padding: 3rem; color: var(--text-faint); font-size: 14px; }
+  .spinner { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 13px; color: var(--text-faint); }
+  footer a { color: var(--green); text-decoration: none; }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 36px; }
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    .table-head { display: none; }
+    .need-row { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; }
+    .need-row .num-cell:first-of-type { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Laced<span>Soles</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="signup.html" class="btn-primary">Sign up</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Connecting donors to real needs</div>
+  <h1>Every size needed.<br><em>Every pair counts.</em></h1>
+  <p>We partner with shoe retailers to get lightly used footwear to the communities that need it most — one size at a time.</p>
+</section>
+
+<div class="counters" style="margin-left:auto;margin-right:auto;margin-bottom:4rem;">
+  <div class="counter"><div class="counter-num" id="count-pairs">—</div><div class="counter-label">pairs donated</div></div>
+  <div class="counter"><div class="counter-num" id="count-countries">—</div><div class="counter-label">countries reached</div></div>
+  <div class="counter"><div class="counter-num" id="count-sizes">—</div><div class="counter-label">sizes needed</div></div>
+</div>
+
+<section class="needs-section">
+  <div class="section-header">
+    <h2 class="section-title">Current needs</h2>
+    <span class="section-hint">Click any size to donate</span>
+  </div>
+  <div id="needs-board">
+    <div class="state-msg"><div class="spinner"></div>Loading current needs...</div>
+  </div>
+</section>
+
+<section class="feed-section">
+  <div class="feed-title">Recent donations</div>
+  <div id="feed-list"><div class="state-msg">Loading...</div></div>
+</section>
+
+<footer>
+  <p>LacedSoles is a registered 501(c)(3) nonprofit · Donations are tax-deductible</p>
+  <p style="margin-top:0.5rem;"><a href="#">Privacy Policy</a> · <a href="#">Terms</a> · <a href="mailto:hello@lacedsoles.org">hello@lacedsoles.org</a></p>
+</footer>
+
+<script>
+  // ---- PASTE YOUR CREDENTIALS HERE ----
+  const AIRTABLE_API_KEY = 'patHDqobUonjeGYwx.be89cf3396ff33e405d745e3c20e7dd282c870ff8af45c43ebb828db3e616107';
+  const AIRTABLE_BASE_ID = 'appxmyMt0Pch38Y0b';
+  // -------------------------------------
+
+  const AIRTABLE_TABLE_NEEDS = 'Needs';
+  const AIRTABLE_TABLE_STATS = 'Stats';
+  const AIRTABLE_TABLE_FEED  = 'Feed';
+  const DONATION_PAGE = 'donate.html';
+  const isConfigured = AIRTABLE_API_KEY !== 'YOUR_API_KEY_HERE';
+
+  const womenKidsSizes = ["4","4.5","5","5.5","6","6.5","7","7.5","8","8.5","9","9.5","10","10.5","11","11.5"];
+  const mensSizes      = ["6","6.5","7","7.5","8","8.5","9","9.5","10","10.5","11","11.5","12","12.5","13","13.5","14"];
+
+  const sampleNeeds = [
+    ...womenKidsSizes.map(s => ({ size: s, category: "Women's & Kids", goal: 10, fulfilled: 0 })),
+    ...mensSizes.map(s      => ({ size: s, category: "Men's",          goal: 10, fulfilled: 0 })),
+  ];
+  const sampleStats = { pairs: 0, countries: 0, sizes: sampleNeeds.length };
+  const sampleFeed  = [];
+
+  async function fetchAirtable(table, params = '') {
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(table)}?${params}`;
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${AIRTABLE_API_KEY}` } });
+    if (!res.ok) throw new Error(`Airtable error: ${res.status}`);
+    return res.json();
+  }
+
+  function getBadge(pct) {
+    if (pct >= 100) return { cls: 'badge-done',     label: 'Fulfilled'   };
+    if (pct >= 40)  return { cls: 'badge-progress', label: 'In progress' };
+    return                 { cls: 'badge-urgent',   label: 'Urgent'      };
+  }
+
+  function getBarColor(pct) {
+    if (pct >= 100) return '#1D9E75';
+    if (pct >= 40)  return '#EF9F27';
+    return '#E24B4A';
+  }
+
+  function renderNeeds(needs) {
+    const board = document.getElementById('needs-board');
+    if (!needs.length) { board.innerHTML = '<div class="state-msg">No active needs right now — check back soon!</div>'; return; }
+    const categoryOrder = ["Women's & Kids", "Men's"];
+    const grouped = {};
+    categoryOrder.forEach(c => grouped[c] = []);
+    needs.forEach(n => { const cat = n.category || "Men's"; if (!grouped[cat]) grouped[cat] = []; grouped[cat].push(n); });
+    const catNote = { "Women's & Kids": "Sizes 4–11.5 · Kids can wear women's sizes", "Men's": "Sizes 6–14" };
+    const colHead = `<div class="table-head"><div class="th">Size</div><div class="th">Goal</div><div class="th">Fulfilled</div><div class="th">Progress</div><div class="th">Status</div></div>`;
+    let html = '';
+    categoryOrder.forEach(cat => {
+      const items = grouped[cat];
+      if (!items || !items.length) return;
+      html += `<div class="category-section"><div class="category-header"><span>${cat}</span><span class="category-note">${catNote[cat] || ''}</span></div>${colHead}`;
+      items.forEach(n => {
+        const pct = Math.min(100, Math.round((n.fulfilled / n.goal) * 100));
+        const badge = getBadge(pct); const color = getBarColor(pct); const isFulfilled = pct >= 100;
+        const href = isFulfilled ? '#' : `${DONATION_PAGE}?size=${encodeURIComponent(n.size)}&goal=${n.goal}&fulfilled=${n.fulfilled}`;
+        html += `<a href="${href}" class="need-row${isFulfilled ? ' fulfilled' : ''}" ${isFulfilled ? 'onclick="return false"' : ''}>
+          <div><div class="size-label">Size ${n.size}</div></div>
+          <div class="num-cell">${n.goal}</div>
+          <div class="num-cell">${n.fulfilled}</div>
+          <div><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div><div class="bar-pct">${pct}%</div></div>
+          <div><span class="badge ${badge.cls}">${badge.label}</span></div>
+        </a>`;
+      });
+      html += '</div>';
+    });
+    board.innerHTML = html;
+  }
+
+  function renderStats(s) {
+    if (s.pairs === 0 && s.countries === 0) { document.querySelector('.counters').style.display = 'none'; return; }
+    document.getElementById('count-pairs').textContent     = s.pairs.toLocaleString();
+    document.getElementById('count-countries').textContent = s.countries;
+    document.getElementById('count-sizes').textContent     = s.sizes;
+  }
+
+  function renderFeed(items) {
+    const list = document.getElementById('feed-list');
+    if (!items.length) { list.innerHTML = '<div class="state-msg" style="padding:1rem 0;text-align:left;font-size:14px;">No donations yet — be the first.</div>'; return; }
+    list.innerHTML = items.map(f => `<div class="feed-item"><div class="feed-dot"></div><span><span class="feed-name">${f.message}</span> ${f.detail} · ${f.time}</span></div>`).join('');
+  }
+
+  async function init() {
+    if (!isConfigured) { renderNeeds(sampleNeeds); renderStats(sampleStats); renderFeed(sampleFeed); return; }
+    try {
+      const [needsData, statsData, feedData] = await Promise.all([
+        fetchAirtable(AIRTABLE_TABLE_NEEDS, 'filterByFormula={Active}=1&sort[0][field]=Fulfilled&sort[0][direction]=asc'),
+        fetchAirtable(AIRTABLE_TABLE_STATS, ''),
+        fetchAirtable(AIRTABLE_TABLE_FEED,  'maxRecords=5&sort[0][field]=Created&sort[0][direction]=desc'),
+      ]);
+      const needs = needsData.records.map(r => ({ size: r.fields.Size || '', category: r.fields.Category || '', goal: r.fields.Goal || 0, fulfilled: r.fields.Fulfilled || 0 }));
+      const statsMap = {};
+      statsData.records.forEach(r => { statsMap[r.fields.Name] = r.fields.Value; });
+      const stats = { pairs: statsMap['Pairs Donated'] || 0, countries: statsMap['Countries Reached'] || 0, sizes: needs.filter(n => (n.fulfilled / n.goal) < 1).length };
+      const feed = feedData.records.map(r => ({ message: r.fields.Message || '', detail: r.fields.Detail || '', time: r.fields.Time || '' }));
+      renderNeeds(needs); renderStats(stats); renderFeed(feed);
+    } catch (err) {
+      console.error(err);
+      document.getElementById('needs-board').innerHTML = `<div class="state-msg">Couldn't load data. Check your Airtable credentials.<br><small>${err.message}</small></div>`;
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
